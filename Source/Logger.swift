@@ -240,7 +240,7 @@ open class Logger {
         let enableAsset = self.enableAsset
 
         queue.async {
-            Swift.debugPrint(result, separator: "", terminator: "")
+            Swift.print(result, separator: "", terminator: "")
             if enableAsset, level == .error {
                 Swift.assert(false, result)
             }
@@ -277,7 +277,7 @@ open class Logger {
         )
 
         queue.async {
-            Swift.debugPrint(result)
+            Swift.print(result)
         }
     }
 }

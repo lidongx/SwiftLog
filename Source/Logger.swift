@@ -23,11 +23,14 @@
 //
 
 import Foundation
-
+#if canImport(FirebaseCrashlytics)
+import Firebase
+import FirebaseCrashlytics
+#endif
 private let benchmarker = Benchmarker()
 
 public enum Level: Int {
-    case trace, debug, info, warning, error
+    case trace, debug, info, warning, error , firebase
 
     var description: String {
         return String(describing: self).uppercased()
@@ -51,6 +54,10 @@ open class Logger {
 
     /// The logger theme.
     open var theme: Theme?
+    
+    open var emoji: Emoji?
+    
+    open var enableAsset: Bool
 
     /// The minimum level of severity.
     open var minLevel: Level
@@ -77,10 +84,18 @@ open class Logger {
      
      - returns: A newly created logger.
      */
-    public init(formatter: Formatter = .default, theme: Theme? = nil, minLevel: Level = .trace) {
+    public init(
+        formatter: Formatter = .default,
+        emoji:Emoji = Emojis.default,
+        theme: Theme? = Themes.default,
+        minLevel: Level = .trace,
+        enableAsset:Bool = true
+    ) {
         self.formatter = formatter
+        self.emoji = emoji
         self.theme = theme
         self.minLevel = minLevel
+        self.enableAsset = enableAsset
 
         formatter.logger = self
     }
@@ -146,6 +161,30 @@ open class Logger {
     }
 
     /**
+     Logs a message with a warning severity level.
+     
+     - parameter items:      The items to log.
+     - parameter separator:  The separator between the items.
+     - parameter terminator: The terminator of the log message.
+     - parameter file:       The file in which the log happens.
+     - parameter line:       The line at which the log happens.
+     - parameter column:     The column at which the log happens.
+     - parameter function:   The function in which the log happens.
+     */
+    open func firebase(_ items: Any..., separator: String = " ", terminator: String = "\n", file: String = #file, line: Int = #line, column: Int = #column, function: String = #function) {
+        log(
+            .firebase,
+            items,
+            separator,
+            terminator,
+            file,
+            line,
+            column,
+            function
+        )
+    }
+
+    /**
      Logs a message with an error severity level.
      
      - parameter items:      The items to log.
@@ -189,8 +228,22 @@ open class Logger {
             date: date
         )
 
+        if(level == .firebase) {
+            #if canImport(FirebaseCrashlytics)
+            if FirebaseApp.app() == nil {
+                assert(false, "Firebase need excute FirebaseApp.configure()")
+            }
+            Crashlytics.crashlytics().log(result)
+            #endif
+        }
+
+        let enableAsset = self.enableAsset
+
         queue.async {
-            Swift.print(result, separator: "", terminator: "")
+            Swift.debugPrint(result, separator: "", terminator: "")
+            if enableAsset {
+                Swift.assert(false, result)
+            }
         }
     }
 
@@ -224,7 +277,7 @@ open class Logger {
         )
 
         queue.async {
-            Swift.print(result)
+            Swift.debugPrint(result)
         }
     }
 }

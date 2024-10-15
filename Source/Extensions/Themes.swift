@@ -28,7 +28,8 @@ extension Themes {
         debug: "#0000FF",
         info: "#00FF00",
         warning: "#FFFB00",
-        error: "#FF0000"
+        error: "#FF0000",
+        firebase: "#FF4500"
     )
 
     public static let dusk = Theme(
@@ -36,7 +37,8 @@ extension Themes {
         debug: "#526EDA",
         info: "#93C96A",
         warning: "#D28F5A",
-        error: "#E44347"
+        error: "#E44347",
+        firebase: "#FF4500"
     )
 
     public static let midnight = Theme(
@@ -44,7 +46,8 @@ extension Themes {
         debug: "#527EFF",
         info: "#08FA95",
         warning: "#EB905A",
-        error: "#FF4647"
+        error: "#FF4647",
+        firebase: "#FF4500"
     )
 
     public static let tomorrow = Theme(
@@ -52,7 +55,8 @@ extension Themes {
         debug: "#4271AE",
         info: "#718C00",
         warning: "#EAB700",
-        error: "#C82829"
+        error: "#C82829",
+        firebase: "#FF4500"
     )
 
     public static let tomorrowNight = Theme(
@@ -60,7 +64,8 @@ extension Themes {
         debug: "#81A2BE",
         info: "#B5BD68",
         warning: "#F0C674",
-        error: "#CC6666"
+        error: "#CC6666",
+        firebase: "#FF4500"
     )
 
     public static let tomorrowNightEighties = Theme(
@@ -68,7 +73,8 @@ extension Themes {
         debug: "#6699CC",
         info: "#99CC99",
         warning: "#FFCC66",
-        error: "#F2777A"
+        error: "#F2777A",
+        firebase: "#FF4500"
     )
 
     public static let tomorrowNightBright = Theme(
@@ -76,6 +82,7 @@ extension Themes {
         debug: "#7AA6DA",
         info: "#B9CA4A",
         warning: "#E7C547",
-        error: "#D54E53"
+        error: "#D54E53",
+        firebase: "#FF4500"
     )
 }

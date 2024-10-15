@@ -223,8 +223,12 @@ private extension Formatter {
      - returns: A formatted Level component.
      */
     func format(level: Level) -> String {
-        let text = level.description
+        var text = ""
+        if let emoji = logger?.emoji?.items[level]{
+            text += emoji
+        }
 
+        text += level.description
         if let color = logger?.theme?.colors[level] {
             return text.withColor(color)
         }

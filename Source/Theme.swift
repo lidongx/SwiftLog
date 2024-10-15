@@ -48,13 +48,21 @@ open class Theme: Themes {
      
      - returns: A theme with the specified colors.
      */
-    public init(trace: String, debug: String, info: String, warning: String, error: String) {
+    public init(
+        trace: String,
+        debug: String,
+        info: String,
+        warning: String,
+        error: String,
+        firebase:String
+    ) {
         colors = [
             .trace: Theme.formatHex(trace),
             .debug: Theme.formatHex(debug),
             .info: Theme.formatHex(info),
             .warning: Theme.formatHex(warning),
-            .error: Theme.formatHex(error)
+            .error: Theme.formatHex(error),
+            .firebase: Theme.formatHex(firebase)
         ]
     }
 
@@ -67,10 +75,10 @@ open class Theme: Themes {
      */
     private static func formatHex(_ hex: String) -> String {
         let scanner = Scanner(string: hex)
-        var hex: UInt32 = 0
+        var hex: UInt64 = 0
 
         scanner.charactersToBeSkipped = CharacterSet(charactersIn: "#")
-        scanner.scanHexInt32(&hex)
+        scanner.scanHexInt64(&hex)
 
         let r = (hex & 0xFF0000) >> 16
         let g = (hex & 0xFF00) >> 8

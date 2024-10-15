@@ -241,7 +241,7 @@ open class Logger {
 
         queue.async {
             Swift.debugPrint(result, separator: "", terminator: "")
-            if enableAsset {
+            if enableAsset, level == .error {
                 Swift.assert(false, result)
             }
         }

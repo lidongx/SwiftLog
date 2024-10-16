@@ -23,9 +23,8 @@
 //
 
 import Foundation
-#if canImport(FirebaseCrashlytics)
+#if canImport(Firebase)
 import Firebase
-import FirebaseCrashlytics
 #endif
 private let benchmarker = Benchmarker()
 
@@ -227,7 +226,7 @@ open class Logger {
         )
 
         if(level == .firebase) {
-            #if canImport(FirebaseCrashlytics)
+            #if canImport(Firebase)
             if FirebaseApp.app() == nil {
                 assert(false, "Firebase need excute FirebaseApp.configure()")
             }

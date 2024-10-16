@@ -8,6 +8,7 @@ let package = Package(
             name: "Log",
             targets: ["Log"]),
     ],
+
     targets: [
         .target(
             name: "Log",

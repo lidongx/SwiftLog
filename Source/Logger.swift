@@ -232,6 +232,7 @@ open class Logger {
                 assert(false, "Firebase need excute FirebaseApp.configure()")
             }
             Crashlytics.crashlytics().log(result)
+            print("tqtyqdqd")
             #endif
         }
 

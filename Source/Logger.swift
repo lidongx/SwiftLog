@@ -23,10 +23,6 @@
 //
 
 import Foundation
-#if canImport(FirebaseCrashlytics)
-import Firebase
-import FirebaseCrashlytics
-#endif
 private let benchmarker = Benchmarker()
 
 public enum Level: Int {
@@ -227,13 +223,7 @@ open class Logger {
         )
 
         if(level == .firebase) {
-            #if canImport(FirebaseCrashlytics)
-            if FirebaseApp.app() == nil {
-                assert(false, "Firebase need excute FirebaseApp.configure()")
-            }
-            Crashlytics.crashlytics().log(result)
-            print("tqtyqdqd")
-            #endif
+            sendFirebaseLog(result)
         }
 
         guard enabled && level >= minLevel else { return }
@@ -247,6 +237,13 @@ open class Logger {
         }
     }
 
+    func sendFirebaseLog(_ result: String) {
+        // 动态检测是否存在 FIRCrashlytics 类
+        if let crashlyticsClass = NSClassFromString("FIRCrashlytics") as? NSObject.Type {
+            let crashlyticsInstance = crashlyticsClass.value(forKey: "crashlytics") as? NSObject
+            crashlyticsInstance?.perform(Selector(("log:")), with: result)
+        }
+    }
     /**
      Measures the performance of code.
      

@@ -38,8 +38,9 @@ open class Theme: Themes {
     }
 
     /**
+     注意:主题丹带上颜色在Xcode输出日志中不支持
      Creates and returns a theme with the specified colors.
-     
+    
      - parameter trace:   The color for the trace level.
      - parameter debug:   The color for the debug level.
      - parameter info:    The color for the info level.

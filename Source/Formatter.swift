@@ -224,15 +224,16 @@ private extension Formatter {
      */
     func format(level: Level) -> String {
         var text = ""
-//        if let emoji = logger?.emoji?.items[level]{
-//            text += emoji
-//        }
-
-        text += level.description
-        if let color = logger?.theme?.colors[level] {
-            return text.withColor(color)
+        if let emoji = logger?.emoji?.items[level]{
+            text += emoji
         }
 
+        text += " ["+level.description+"] "
+        /*
+         if let color = logger?.theme?.colors[level] {
+            return text.withColor(color)
+         }
+         */
         return text
     }
 

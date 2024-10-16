@@ -85,9 +85,9 @@ open class Logger {
      - returns: A newly created logger.
      */
     public init(
-        formatter: Formatter = .default,
+        formatter: Formatter = .detailed,
         emoji:Emoji = Emojis.default,
-        theme: Theme? = Themes.default,
+        theme: Theme? = nil,
         minLevel: Level = .trace,
         enableAsset:Bool = true
     ) {
@@ -212,10 +212,8 @@ open class Logger {
      - parameter function:   The function in which the log happens.
      */
     private func log(_ level: Level, _ items: [Any], _ separator: String, _ terminator: String, _ file: String, _ line: Int, _ column: Int, _ function: String) {
-        guard enabled && level >= minLevel else { return }
 
         let date = Date()
-
         let result = formatter.format(
             level: level,
             items: items,
@@ -237,8 +235,9 @@ open class Logger {
             #endif
         }
 
+        guard enabled && level >= minLevel else { return }
+        
         let enableAsset = self.enableAsset
-
         queue.async {
             Swift.print(result, separator: "", terminator: "")
             if enableAsset, level == .error {

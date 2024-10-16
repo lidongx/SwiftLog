@@ -28,7 +28,7 @@ public class Log {
         }
     }
     
-    public static var theme: Theme = .default {
+    public static var theme: Theme? = nil {
         didSet {
             shared.theme = theme
         }

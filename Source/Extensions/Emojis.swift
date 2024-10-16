@@ -13,11 +13,11 @@ open class Emojis {}
 
 extension Emojis{
     public static let `default` = Emoji (
-        trace: "🔍",
-        debug: "💬",
-        info: "ℹ️",
-        warning: " ⚠️",
-        error: "❌",
-        firebase: "🔥"
+        trace: "🔗🔗🔗",
+        debug: "💬💬💬",
+        info: "ℹ️ℹ️ℹ️",
+        warning: "⚠️⚠️⚠️",
+        error: "❌❌❌",
+        firebase: "🔥🔥🔥"
     )
 }

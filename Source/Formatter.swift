@@ -228,7 +228,7 @@ private extension Formatter {
             text += emoji
         }
 
-        text += " ["+level.description+"] "
+        text += " ["+level.description+"]"
         /*
          if let color = logger?.theme?.colors[level] {
             return text.withColor(color)
